@@ -29,7 +29,7 @@ options:
 
 ${OBJ}: 
 
-${PROJ}: ${OBJ}
+${PROJ}: cef.h ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
 vertex.glsl:
@@ -45,7 +45,7 @@ ef_shader.h: vertex.glsl fragment.glsl
 	cat fragment.glsl | sed "s/^/\"/; s/$$/\\\n\"/" >> ef_shader.h
 	echo ";" >> ef_shader.h
 
-cef.h:
+cef.h: ef_shader.h
 
 install: cef.h ef_shader.h
 	cp -f ${OBJ} ${LIB}
